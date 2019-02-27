@@ -1,1 +1,15 @@
 
+creating ipvlan in docker
+
+
+docker network create -d ipvlan \
+--subnet=192.168.1.0/24 \
+--gateway=192.168.1.254 \
+--ip-range=192.168.1.0/28 \
+-o ipvlan_mode=l2 \
+-o parent=eth0 ps-ip
+
+
+creating a container and associate to ps-ip ipvlan bridge
+
+docker run -dt --name c1 --network ps-ip alpine sleep 1d
